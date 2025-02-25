@@ -9,6 +9,7 @@ class ToDoList extends StatefulWidget {
 
 class _ToDoListState extends State<ToDoList> {
   List<Map<String, dynamic>> task = [];
+  Color _appBarColor = Colors.blue;
 
   void addTask(String taskName) {
     setState(() {
@@ -34,7 +35,8 @@ class _ToDoListState extends State<ToDoList> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Center(
+          title: Container(
+            margin: EdgeInsets.only(left: 20),
             child: Text(
               "Your To Do List!",
               style: TextStyle(
@@ -44,6 +46,13 @@ class _ToDoListState extends State<ToDoList> {
               ),
             ),
           ),
+          actions: [
+            IconButton(
+              onPressed: _settingDialog,
+              icon: Icon(Icons.settings),
+              padding: EdgeInsets.only(right: 18),
+            ),
+          ],
           bottom: TabBar(
             labelColor: Colors.white,
             unselectedLabelColor: Colors.black,
@@ -57,7 +66,7 @@ class _ToDoListState extends State<ToDoList> {
             ],
             dividerColor: Colors.white,
           ),
-          backgroundColor: Colors.blue,
+          backgroundColor: _appBarColor,
         ),
         body: TabBarView(
           physics: BouncingScrollPhysics(),
@@ -189,6 +198,61 @@ class _ToDoListState extends State<ToDoList> {
           ],
         );
       },
+    );
+  }
+
+  void _settingDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Settings"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text("Choose AppBar Color"),
+              SizedBox(height: 150),
+              Wrap(
+                spacing: 10,
+                children: [
+                  _colorOption(Colors.red, "Red"),
+                  _colorOption(Colors.blue, "Blue"),
+                  _colorOption(Colors.green, "Green"),
+                  _colorOption(Colors.yellow, "Yellow"),
+                  _colorOption(Colors.purple, "Purple"),
+                  _colorOption(Colors.amber, "Amber"),
+                ],
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text("Close"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _colorOption(Color color, String label) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _appBarColor = color;
+        });
+        Navigator.pop(context);
+      },
+      child: Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: color,
+          shape: BoxShape.circle,
+          border: Border.all(color: Colors.black, width: 1),
+        ),
+        child: SizedBox(width: 30, height: 30),
+      ),
     );
   }
 }
