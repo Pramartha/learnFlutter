@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ToDoList extends StatefulWidget {
-  const ToDoList({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<ToDoList> createState() => _ToDoListState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _ToDoListState extends State<ToDoList> {
+class _HomePageState extends State<HomePage> {
   List<Map<String, dynamic>> task = [];
   Color _appBarColor = Colors.blue;
 
@@ -35,13 +35,13 @@ class _ToDoListState extends State<ToDoList> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Container(
-            margin: EdgeInsets.only(left: 20),
+          leadingWidth: 50,
+          title: Center(
             child: Text(
-              "Your To Do List!",
+              "YOUR TO-DO LIST",
               style: TextStyle(
                 fontSize: 20,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w800,
                 letterSpacing: 0.8,
               ),
             ),
@@ -209,9 +209,10 @@ class _ToDoListState extends State<ToDoList> {
           title: Text("Settings"),
           content: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("Choose AppBar Color"),
-              SizedBox(height: 150),
+              Text("Choose AppBar Color : "),
+              SizedBox(height: 50),
               Wrap(
                 spacing: 10,
                 children: [
@@ -220,7 +221,6 @@ class _ToDoListState extends State<ToDoList> {
                   _colorOption(Colors.green, "Green"),
                   _colorOption(Colors.yellow, "Yellow"),
                   _colorOption(Colors.purple, "Purple"),
-                  _colorOption(Colors.amber, "Amber"),
                 ],
               ),
             ],
