@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          leadingWidth: 50,
+          leading: Container(),
           title: Center(
             child: Text(
               "YOUR TO-DO LIST",
@@ -144,9 +144,22 @@ class _HomePageState extends State<HomePage> {
                 toggleTaskStatus(task.indexOf(taskList[index]));
               },
             ),
-            trailing: IconButton(
-              onPressed: () => removeTask(task.indexOf(taskList[index])),
-              icon: Icon(Icons.delete, color: Colors.red),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 5,
+              children: [
+                IconButton(
+                  tooltip: "Mark as Completed",
+                  onPressed:
+                      () => toggleTaskStatus(task.indexOf(taskList[index])),
+                  icon: Icon(Icons.check, color: Colors.blue),
+                ),
+                IconButton(
+                  tooltip: "Delete Task",
+                  onPressed: () => removeTask(task.indexOf(taskList[index])),
+                  icon: Icon(Icons.delete, color: Colors.red),
+                ),
+              ],
             ),
           ),
         );
